@@ -12,6 +12,7 @@ SimpleList<T>::~SimpleList(){
     {
       destroy(elements[i]);
     }
+  numElements = 0;
   delete [] elements; 
 }
 
@@ -19,11 +20,11 @@ template<class T>
 T SimpleList<T>::at(int index) const throw (InvalidIndexException){
   if ( index >= CAPACITY || index < 0)
     {
-      throw new InvalidIndexException;
+      throw InvalidIndexException();
     }
   else if ( index > numElements-1 )
     {
-      throw new InvalidIndexException;
+      throw InvalidIndexException();
     }
   else
     {
@@ -47,7 +48,7 @@ template<class T>
 T SimpleList<T>::first() const throw (EmptyListException){
   if ( numElements == 0)
     {
-      throw new EmptyListException;
+      throw EmptyListException();
     }
   else
     {
@@ -59,7 +60,7 @@ template<class T>
 T SimpleList<T>::last() const throw (EmptyListException){
   if ( numElements == 0)
     {
-      throw new EmptyListException;
+      throw EmptyListException();
     }
   else
     {
@@ -77,7 +78,7 @@ void SimpleList<T>::insert(T item) throw (FullListException){
   
   if (numElements == CAPACITY)
     {
-      throw new FullListException;
+      throw FullListException();
     }
   else
     {
@@ -90,11 +91,11 @@ template <class T>
 void SimpleList<T>::remove(int index) throw (InvalidIndexException, EmptyListException){
   if ( numElements == 0)
     {
-      throw new EmptyListException;
+      throw EmptyListException();
     }
   else if ( index >= numElements || index < 0 )
     {
-      throw new InvalidIndexException;
+      throw InvalidIndexException();
     }
   else
     {
