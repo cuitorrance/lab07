@@ -8,7 +8,7 @@ SimpleList<T>::SimpleList(){
 
 template<class T>
 SimpleList<T>::~SimpleList(){
-  for (unsigned i = 0; i < CAPACITY; i++)
+  for (int i = 0; i <= numElements; i++)
     {
       destroy(elements[i]);
     }
