@@ -1,4 +1,15 @@
 #include "SimpleList.h"
+#include <type_traits>
+
+template<class T>
+void destroy(T element){
+  //donothing
+}
+template<class T>
+void destroy(T* element){
+  delete element;
+}
+
 
 template <class T>
 SimpleList<T>::SimpleList(){
@@ -8,9 +19,17 @@ SimpleList<T>::SimpleList(){
 
 template<class T>
 SimpleList<T>::~SimpleList(){
-  for (int i = 0; i <= numElements; i++)
+  for (int i = 0; i < numElements; i++)
     {
-      destroy(elements[i]);
+      if ( std::is_pointer<T>::value)
+	{
+	  //delete elements[i];
+	  destroy(elements[i]);
+	}
+      else
+	{
+	  destroy(elements[i]);
+	}
     }
   numElements = 0;
   delete [] elements; 
@@ -109,12 +128,4 @@ void SimpleList<T>::remove(int index) throw (InvalidIndexException, EmptyListExc
       numElements--;
       
     }
-}
-template<class T>
-void SimpleList<T>::destroy(T element){
-  //donothing
-}
-template<class T>
-void SimpleList<T>::destroy(T* element){
-  delete element;
 }
